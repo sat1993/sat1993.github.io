@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[neovim配置与插件记录]]></title>
+    <url>%2F2018%2F01%2F16%2Fneovim-config%2F</url>
+    <content type="text"><![CDATA[neovim neovim 是 vim 的重构版，完整继承了 vim 的操作键。并在此基础上开发了许多新特性。 neovim安装 macos / os x 12~ brew update~ brew install neovim centos7 123yum -y install epel-releasecurl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfracloud.org/coprs/dperson/neovim/repo/epel-7/dperson-neovim-epel-7.repoyum -y install neovim neovim配置支持python插件参考博客安装python3,pyenv管理多版本pythonneovim支持python插件，但需要有python3以及neovim依赖包支持。使用的配置文件中有使用到python插件的。运行pip intall neovim安装python neovim依赖包。 配置neovim克隆配置文件到.config目录：1git clone https://github.com/sat1993/nvim-config.git ~/.config/nvim 克隆完成之后，安装本地插件：1234567# 进入nvim~ nvim# 会报很多的错误，这里一路回车进入# 安装插件，插件会安装在~/.config/nvim/viml/plugged/目录:pluginstall# 更新远端插件，此命令可能需要运行多次。安装较慢。:updateremoteplugins 安装完成后:q!退出，再nvim进入时没有报错，且可以看到如下页面说明安装完成： 插件记录roxma/nvim-completion-managernvim-completion-manager 代码自动补全框架。 fgrsnau/ncm-otherbufncm-otherbufnvim-completion-manager提供nvim buf相关提示补全的插件。 roxma/ncm-githubncm-github roxma/nvim-cm-ternnvim-cm-tern 用户目录需要配置.tern-config或者项目目录需要配置.tern-project 具体配置参考tern reference manual shougo/neco-syntaxneco-syntax ncm句法补充 shougo/neco-vimfor vim neco-vim ncm viml语法补充 iamcco/mathjax-support-for-mkdpfor markdown mathjax-support-for-mkdp iamcco/markdown-preview.vimfor markdown iamcco/markdown-preview.vim joker1007/vim-markdown-quote-syntaxfor markdown joker1007/vim-markdown-quote-syntax markdown语法高亮展示 w0rp/alew0rp/ale 代码规范检查框架。 sgur/vim-editorconfigsgur/vim-editorconfig vim editorconfig配置 mattn/emmet-vimmattn/emmet-vim emmet前身为zen coding，能快速生成html代码。 使用案例1234~ nvim index.html输入html:5_,_为光标所在位置。组合建&lt;c-y&gt;&lt;leader&gt;，生成html5代码。 calebeby/ncm-csscalebeby/ncm-css css自动补全。 maksimr/vim-jsbeautifymaksimr/vim-jsbeautify 按.editconfig的配置格式化js、jsx文件。 12345678910111213141516171819202122232425262728~ nvim .editconfig;.editorconfigroot = true[**.js]indent_style = spaceindent_size = 2[**.json]indent_style = spaceindent_size = 2[**.jsx]e4x = trueindent_style = spaceindent_size = 2[**.css]indent_style = spaceindent_size = 2[**.html]indent_style = spaceindent_size = 2max_char = 78brace_style = expand 组合键&lt;leader&gt;sf即可一键格式化当前的css、js、html、json、jsx文件。 heavenshell/vim-jsdocheavenshell/vim-jsdoc 使用 移动光标到fuction行 输入:jsdoc插入jsdoc galooshi/vim-import-jsgalooshi/vim-import-js 使用需要先通过npm安装import-js npm install -g import-js &lt;leader&gt;j对应:importjsword。导入光标所在处变量的模块 &lt;leader&gt;i对应:importjsfix。导入所有未导入的模块，并移除未使用的模块。 &lt;leader&gt;g对应:importjsgoto。前往光标所在模块。 tpope/vim-fugitivetpope/vim-fugitive 使用 :gstatus查看文件状态，-添加或者移除提交列表中的文件。 :gcommit提交git版本。 :gblame提交blame备注信息。 :ggrep以关键字查询提交信息。但一运行就报错。。 :glog相当于git log :gmove相当于git mv :gread相当于git checkout --filename :gbrowse在浏览器中打开当前文件。 junegunn/gv.vimjunegunn/gv.vim 使用 :gv查看提交历史。和git log相等 :gv!仅展示带有当前文件修改的提交记录 :gv?展示当前文件的本地提交列表 cohama/agit.vimcohama/agit.vim 使用:agit查看当前分支的提交状况。 lokaltog/vim-easymotionlokaltog/vim-easymotion 使用移动与wbewbe移动一样决定移动方式。如：&lt;Leader&gt;&lt;Leader&gt;w,按下相应的字母即可跳转过去。同理可用&lt;leader&gt;&lt;leader&gt;e和&lt;leader&gt;&lt;leader&gt;b选择首字母还是单词末尾。 terryma/vim-multiple-cursorsterryma/vim-multiple-cursors 上述案例中，vim命令如下：2Gfp&lt;C-n&gt;&lt;C-n&gt;&lt;C-n&gt;cname 移动到目标单词后，使用选中一样的单词。 itchyny/vim-cursorworditchyny/vim-cursorword 光标相同单词展示下划线。 tpope/vim-surroundtpope/vim-surround kana/vim-textobj-userkana/vim-textobj-user扩展文本对象。 terryma/vim-expand-regionterryma/vim-expand-region 选中区块。&lt;S-+&gt;扩展选中区域。 scrooloose/nerdcommenterscrooloose/nerdcommenter 使用快速注释工具： [count]&lt;leader&gt;cc注释当前行或者Visual模式选中的块 [count]&lt;leader&gt;cn与cc相同，但会强制注释 [count]&lt;leader&gt;cm使用注释块注释，而不是注释行。 [count]&lt;leader&gt;ci使用注释行注释，注释整行。 [count]&lt;leader&gt;cs注释块，并格式化 [count]&lt;leader&gt;cy与cc相同，优先拉取注释行。 &lt;leader&gt;c$从当前光标注释到文件结尾 &lt;leader&gt;cA在当前行的结束位置添加注释 &lt;leader&gt;ca切换注释方式，如java从\切换到**\ [count]&lt;leader&gt;cl行注释首列对齐。 [count]&lt;leader&gt;cb使用对齐的行注释。 [count]&lt;leader&gt;cu取消选中行的注释。 kshenoy/vim-signaturekshenoy/vim-signature 使用添加mark，并支持在mark中跳转。 mx 添加x mark。x可以为其他字母 dmx 删除x mark。 m, 自动添加mark，如果之前最后的mark为b,则添加c mark m. 自动添加mark或取消，如果之前最后的mark为b，则添加c，若已使用m.添加过mark，则取消。 m- 删除当前光标所在mark m&lt;Space&gt; 删除当前缓冲区所有的mark ]` 跳转到下一个mark [` 跳转到上一个mark ]’ 跳转到下一个mark的行首 [‘ 跳转到上一个mark的行首 `] 按字母顺序向下跳转 `[ 按字母顺序向上跳转 ‘] 按字母顺序向下跳转到目标mark的行首 ‘[ 按字母顺序向上跳转到目标mark的行首 m/ 打开展示所有mark的列表。 m[0-9] 对应mark !@#$%^&amp;*()。类型mark m&lt;S-[0-9]&gt; 移除对应的mark ]- 跳转到下一个相同类型的mark [- 跳转到上一个相同类型的mark ]= 跳转到下一个任意类型的mark [= 跳转到上一个任意类型的mark m? 打开展示所有类型mark的列表 m&lt;BS&gt; BS为退格键，删除所有类型mark]]></content>
+      <categories>
+        <category>vim</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[nvm管理多版本nodejs]]></title>
+    <url>%2F2018%2F01%2F16%2Fnvm-nodejs-manager-md%2F</url>
+    <content type="text"><![CDATA[nvm简介nvm是一个简单的命令行管理多版本nodejs工具。可以在多个不同的nodejs版本中进行快捷切换，而且npm仓库不会冲突。 nvm安装官方github-安装脚本 1~ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash 上述脚本会将https://github.com/creationix/nvm.git仓库克隆至~/.nvm目录，并会添加环境变量至~/.bash_profile: 1234~ vi .bash_profile# 如果.bash_profile文件中没有以下内容，则添加.export NVM_DIR=&quot;$HOME/.nvm&quot;[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm nvm运用 nvm ls查看当前操作系统安装的nodejs。 nvm ls-remote查看可安装的nodejs版本。 nvm install v8.9.3安装指定版本的nodejs。 nvm use v8.9.3切换nodejs版本。 nvm version或者nvm current查看当前使用的nodejs版本。 nvm alias default v8.9.3指定系统默认版本的nodejs。 nvm uninstall v8.9.3卸载指定版本的nodejs。 使用不同的nodejs在项目目录下创建.nvmrc文件，文件指定nodejs的版本。 123456789101112131415161718# 查看当前系统安装的nodejs~ nvm ls v6.11.0-&gt; v8.9.3default -&gt; v8.9.3node -&gt; stable (-&gt; v8.9.3) (default)stable -&gt; 8.9 (-&gt; v8.9.3) (default)iojs -&gt; N/A (default)lts/* -&gt; lts/carbon (-&gt; N/A)lts/argon -&gt; v4.8.7 (-&gt; N/A)lts/boron -&gt; v6.12.3 (-&gt; N/A)lts/carbon -&gt; v8.9.4 (-&gt; N/A)# 指定当前项目使用的nodejs版本~ echo &quot;v8.9.3&quot; &gt; .nvmrc# 切换node版本~ nvm useFound &apos;/path/to/project/.nvmrc&apos; with version &lt;v8.9.3&gt;Now using node v8.9.3 (npm v5.6.0)]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>centos7</tag>
+        <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[frp内网穿透]]></title>
     <url>%2F2018%2F01%2F12%2Ffrp-reverse-proxy%2F</url>
     <content type="text"><![CDATA[frp是什么？frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp, http, https 协议。github 由frpc与frps组成，frps是服务端，frpc是客户端。 使用frp我们可以将家中的机器通过阿里云、腾讯云代理出来，从而可以在公网访问服务。 下载frp命令工具通过dpkg --print-architecture查看你操作系统的位数。我的是amd64。如果没有dpkg直接yum install即可。 github-release下载对应的frp包。123456789# 实际上文件是在amazon.s3存储上，可能需要翻墙下载~ curl -o frp.tar.gz https://github.com/fatedier/frp/releases/download/v0.14.1/frp_0.14.1_linux_amd64.tar.gz# 解压缩~ tar -zxvf frp.tar.gz# 移动到/usr/local/bin目录下，终端命令工具~ sudo mv frp_0.13.0_linux_amd64/frps /usr/local/bin/~ sudo mv frp_0.13.0_linux_amd64/frpc /usr/local/bin/~ frpc --help~ frps --help 使用Docker来启动frp服务通过命令启动需要管理好进程，当需要多个转发服务的时候不好管理。也无法得知客户端究竟开放了哪个端口。通过docker可以很好的管理服务。centos7安装Docker 获取docker镜像: 1234# 克隆项目~ git clone https://github.com/sat1993/docker-frp.git# docker build~ cd docker-frp &amp;&amp; docker build -t sat1993/frp ./ 开放ssh服务配置frps服务端我是通过docker启动的服务端，主要好管理端口与服务。 通过命令启动frps服务如果没有docker或者不希望通过docker启动服务端的话，可以使用命令启动。准备ssh.ini配置文件：12[common]bind_port = 40021 启动frps服务：1setsid frps -c ssh.ini 通过docker-compose启动frps服务通过docker-compose.yml配置启动服务：123456789version: &apos;2&apos;services: ssh-frp: images: sat1993/frp:latest ports: - &quot;40021:7000&quot; - &quot;34090:34090&quot; environment: FRP: &quot;server&quot; 通过docker-compose配置文件，可以一目了然启动了哪些frp服务，占用了哪些端口。这里使用docker默认的frps配置文件，开放7000服务端口。上面40021是反向代理服务端口，34090则是对外开放服务端口。34090是由frpc客户端配置的端口。我们的frpc客户端需要连接40021，我们连接ssh服务时通过34090端口。 开放外网端口通过防火墙开放40021端口和34090端口(centos7使用firewalld服务)：123~ firewall-cmd --zone=public --permanent --add-port=40021/tcp~ firewall-cmd --zone=public --permanent --add-port=34090/tcp~ firewall-cmd --reload 如果是阿里云服务，则到管理台配置安全组即可。 配置frpc客户端通过命令行配置frpc客户端，这里不能使用docker配置。因为docker内配置frpc只能转发docker环境内的服务。ssh是宿主机上的服务。准备ssh.ini配置文件：1234567891011121314151617[common]server_addr = &#123;frps服务所在机器的ip或者域名&#125;# frps开放的反向代理服务端口server_port = 40021[ssh]type = tcp# 配置这个可以转发相同网络环境的其他服务。local_ip = 127.0.0.1# 本地ssh服务端口local_port = 22# 通过frps开放出来的服务端口，占用frps所在机器的端口remote_port = 34090# frpc与fprs通信时加密use_encryption = true# 压缩通信消息use_compression = true 运行frpc服务：1setsid frpc -c ssh.ini 连接ssh测试：1ssh -i ../sdk_key/lxz -oPort=34090 xxx@xxx.xxx 我是配置了秘钥登陆的。所以指定秘钥登陆。用户配置与ssh秘钥登陆 frp配置web服务转发这里就只放配置文件了。具体可以参考 github文档 frps配置12345[common]# 反向代理服务端口bind_port = 7000# 实际对外服务的http端口vhost_http_port = 49100 frpc配置1234567891011121314[common]# frps服务的域名或者ipserver_addr = xxx.xxx# frps开发的反向代理服务端口server_port = 7000[web]type = http# 本地需要穿透的实际服务的端口。local_port = 8080# 远端对外服务端口。remote_port = 49100# 对外访问的域名，仅该域名可访问转发的服务。custom_domains = test.bakka.site 如果没有购置域名，可以通过绑定host的形式访问服务。]]></content>
@@ -20,8 +44,8 @@
         <category>centos7</category>
       </categories>
       <tags>
-        <tag>centos7</tag>
         <tag>linux</tag>
+        <tag>centos7</tag>
       </tags>
   </entry>
   <entry>
@@ -32,8 +56,8 @@
         <category>centos7</category>
       </categories>
       <tags>
-        <tag>centos7</tag>
         <tag>linux</tag>
+        <tag>centos7</tag>
         <tag>nfs</tag>
       </tags>
   </entry>
@@ -45,8 +69,8 @@
         <category>centos7</category>
       </categories>
       <tags>
-        <tag>centos7</tag>
         <tag>linux</tag>
+        <tag>centos7</tag>
       </tags>
   </entry>
   <entry>
@@ -57,8 +81,8 @@
         <category>centos7</category>
       </categories>
       <tags>
-        <tag>centos7</tag>
         <tag>linux</tag>
+        <tag>centos7</tag>
       </tags>
   </entry>
   <entry>
@@ -69,8 +93,8 @@
         <category>centos7</category>
       </categories>
       <tags>
-        <tag>centos7</tag>
         <tag>linux</tag>
+        <tag>centos7</tag>
         <tag>docker</tag>
       </tags>
   </entry>
@@ -94,8 +118,8 @@
         <category>centos7</category>
       </categories>
       <tags>
-        <tag>centos7</tag>
         <tag>linux</tag>
+        <tag>centos7</tag>
         <tag>下载工具</tag>
         <tag>docker</tag>
       </tags>
@@ -121,8 +145,8 @@
         <category>centos7</category>
       </categories>
       <tags>
-        <tag>centos7</tag>
         <tag>linux</tag>
+        <tag>centos7</tag>
       </tags>
   </entry>
 </search>
